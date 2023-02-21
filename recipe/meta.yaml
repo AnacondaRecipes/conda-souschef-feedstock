@@ -12,34 +12,39 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<38]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
 
 requirements:
   host:
     - pip
-    - python >=3.8
-    - setuptools >=30.3.0
+    - python
+    - setuptools
     - setuptools-scm
+    - wheel
   run:
-    - python >=3.8
+    - python
     - ruamel.yaml >=0.15.3
     - ruamel.yaml.jinja2
 
 test:
   imports:
     - souschef
-  commands:
-    - pip check
   requires:
     - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/marcelotrevisani/souschef
-  summary: Project to handle conda recipes
-  dev_url: https://github.com/marcelotrevisani/souschef
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
+  summary: Project to handle conda recipes
+  description: |
+    Library to easily manipulate conda recipes.
+  dev_url: https://github.com/marcelotrevisani/souschef
+  doc_url: https://github.com/marcelotrevisani/souschef
 
 extra:
   recipe-maintainers:
